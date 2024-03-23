@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let temp = parseInt(prompt("Enter kilo "));
+      class kg {
+        kgToGrams(Kilo) {
+          return Kilo / 1000;
+        }
+      }
+      class qt extends kg {
+        kgToQt(Kilo) {
+          return Kilo / 20;
+        }
+      }
+      class ton extends qt {
+        qtTOTon(qt) {
+          return qt / 100;
+        }
+      }
+
+      let t = new ton();
+
+      console.log(t.kgToGrams(temp));
+      console.log(t.kgToQt(temp));
+      console.log(t.qtTOTon(temp));
+    </script>
+  </body>
+</html>

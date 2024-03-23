@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>card</title>
+  </head>
+  <body>
+    <button onclick="create()">click</button>
+    <input type="number" placeholder="number of card " id="numCard" />
+    <input type="number" placeholder="number of items" id="cardItems" />
+    <div class="container" id="card"></div>
+
+    <script>
+      let card = document.getElementById("card").innerHTML;
+
+      create = () => {
+        let numCard = document.getElementById("numCard").value;
+        document.getElementById("card").innerHTML = "";
+
+        let cardItems = document.getElementById("cardItems").value;
+        let temp = "";
+        for (let i = 1; i <= numCard; i++) {
+          for (let j = 1; j <= cardItems; j++) {
+            temp += `<li>lorem</li>`;
+          }
+          document.getElementById("card").innerHTML +=
+            `<div class="cardhead">
+            <img src="https://picsum.photos/300/" alt="">
+        </div>
+        <div class="cardBd">
+            <ol>` +
+            temp +
+            `</ol>
+        </div>`;
+          temp = "";
+        }
+      };
+      //   create();
+    </script>
+  </body>
+</html>

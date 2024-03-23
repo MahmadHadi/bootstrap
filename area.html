@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        class Square {
+            constructor (height, width) {
+                this.height = height;
+                this.width = width;
+            }
+            getAreaOfSquare () {
+                return this.height * this.width;
+            }
+        }
+        let sqrt = new Square (10, 20) ;
+        console.log(sqrt.getAreaOfSquare());
+
+        class Circle extends Square {
+            constructor (height, width) {
+                // this.height = height;
+                // this.width = width;
+                super(height, width);
+            }
+            getCircle () {
+                return super.getAreaOfSquare(this.height, this.width) * 3.1415;
+            }
+        }
+
+        class Rectangle extends Square {
+
+            constructor (height, width) {
+                super(height, width);
+            }
+            getRectangle () {
+                return super.getAreaOfSquare(this.height, this.width);
+            }
+
+        }
+        
+        let c = new Circle(10, 10);
+        console.log(c.getCircle().toFixed(2));
+
+        let r = new Rectangle(3, 20);
+        console.log(r.getRectangle().toFixed(2));
+
+        class Square2 {
+            getSqueare (num1, num2) {
+                return num1 * num2;
+            }
+        }
+        class AreaOfCircle extends Square2 {
+            getCircleArea (radius) {
+                return super.getSqueare(radius, radius) * 3.1415;
+            }   
+        }
+        let cn = new AreaOfCircle();
+
+        console.log(cn.getCircleArea(10).toFixed(2));
+    </script>
+</body>
+</html>

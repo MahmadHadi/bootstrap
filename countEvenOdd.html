@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 3px;
+        padding: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex; vertical-align: top; justify-content: center">
+      <ol id="even" style="list-style:lower-greek;">
+        <u>
+          <h2>Even Numbers</h2>
+        </u>
+      </ol>
+      <ol id="odd">
+        <u>
+          <h2>Odd Numbers</h2>
+        </u>
+      </ol>
+
+      <u>
+        <h2 id="tEven" style="margin: 10px">total Even numbers =</h2>
+      </u>
+
+      <u>
+        <h2 id="tOdd" style="margin: 10px">total odd numbers =</h2>
+      </u>
+    </div>
+
+    <script>
+      let nums = [
+        47, 812, 246, 543, 739, 152, 632, 889, 311, 981, 79, 640, 803, 288, 584,
+        729, 437, 359, 727, 597, 960, 35, 387, 118, 651, 992, 743, 685, 417,
+        781, 131, 720, 448, 467, 774, 150, 972, 273, 94, 100, 908, 634, 217,
+        657, 740, 923, 572, 666, 688, 220, 52, 318, 64, 703, 269, 736, 827, 220,
+        335, 576, 151, 118, 148, 63, 607, 187, 494, 733, 810, 529, 998, 223,
+        434, 849, 45, 781, 429, 66, 951, 487, 98, 662, 894, 116, 465, 36, 991,
+        308, 905, 564, 451, 77, 215, 41, 499, 560, 543, 895, 291, 282,
+      ];
+
+      let evenCount = 0,
+        oddCount = 0;
+
+      let even = [],
+        odd = [];
+
+      nums.map(function (number) {
+        if (number % 2 === 0) {
+          evenCount++;
+          even.push(number);
+          // even.splice(1, 10);
+          document.querySelector("#even").innerHTML += `<li>${number}</li>`;
+        } else {
+          oddCount++;
+          odd.push(number);
+          document.querySelector("#odd").innerHTML += `<li>${number}</li>`;
+        }
+      });
+
+      console.log("Even count = " + evenCount);
+      console.log("Odd count = " + oddCount);
+
+      document.querySelector("#tEven").innerHTML += evenCount;
+      document.querySelector("#tOdd").innerHTML += oddCount;
+
+      console.log("Even array =", even, "total Even numbers = ", even.length);
+      console.log("Odd array = ", odd, " total Odd numbers = ", odd.length);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bird Game</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: skyblue;
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+  }
+  #bird {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('bird.png');
+    background-size: cover;
+    transition: transform 0.5s;
+    z-index: 1;
+  }
+  .barrier {
+    position: absolute;
+    background-color: green;
+    width: 50px;
+    bottom: 0;
+    z-index: 0;
+    animation: barrierMovement 4s linear infinite;
+  }
+  @keyframes barrierMovement {
+    from { left: 100%; }
+    to { left: -50px; }
+  }
+  #game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: none;
+  }
+</style>
+</head>
+<body>
+<div id="bird">
+    <img src="https://picsum.photos/50/50" style="border-radius: 50%;" alt="">
+
+</div>
+<div id="game-over">
+  <h2>Game Over!</h2>
+  <p id="score">Your Score: 0</p>
+  <button onclick="restartGame()">Replay</button>
+</div>
+
+<audio id="flapSound">
+  <source src="flap.mp3" type="audio/mpeg">
+</audio>
+<audio id="hitSound">
+  <source src="hit.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const bird = document.getElementById('bird');
+  const gameOverScreen = document.getElementById('game-over');
+  const scoreDisplay = document.getElementById('score');
+  const flapSound = document.getElementById('flapSound');
+  const hitSound = document.getElementById('hitSound');
+
+  let isFlying = false;
+  let gravity = 0.1;
+  let velocity = 0;
+  let score = 0;
+
+  function flapBird() {
+    velocity = -2;
+    flapSound.play();
+  }
+
+  document.addEventListener('mousedown', () => {
+    flapBird();
+  });
+
+  function createBarrier() {
+    const barrier = document.createElement('div');
+    barrier.classList.add('barrier');
+    barrier.style.height = Math.floor(Math.random() * 200 + 50) + 'px';
+    document.body.appendChild(barrier);
+    return barrier;
+  }
+
+  function update() {
+    velocity += gravity;
+    bird.style.top = (bird.offsetTop + velocity) + 'px';
+    if (bird.offsetTop < 0) {
+      bird.style.top = '0px';
+      velocity = 0;
+    }
+    if (bird.offsetTop + bird.offsetHeight > window.innerHeight) {
+      bird.style.top = (window.innerHeight - bird.offsetHeight) + 'px';
+      velocity = 0;
+    }
+
+    const barriers = document.querySelectorAll('.barrier');
+    barriers.forEach(barrier => {
+      barrier.style.left = (barrier.offsetLeft - 2) + 'px';
+
+      if (
+        bird.offsetLeft < barrier.offsetLeft + barrier.offsetWidth &&
+        bird.offsetLeft + bird.offsetWidth > barrier.offsetLeft &&
+        bird.offsetTop < barrier.offsetHeight
+      ) {
+        gameOver();
+      }
+
+      if (barrier.offsetLeft + barrier.offsetWidth < 0) {
+        barrier.parentNode.removeChild(barrier);
+        score++;
+        scoreDisplay.textContent = 'Your Score: ' + score;
+      }
+    });
+
+    requestAnimationFrame(update);
+  }
+
+  function gameOver() {
+    hitSound.play();
+    gameOverScreen.style.display = 'block';
+  }
+
+  function restartGame() {
+    location.reload();
+  }
+
+  setInterval(createBarrier, 2000);
+  update();
+</script>
+</body>
+</html>
