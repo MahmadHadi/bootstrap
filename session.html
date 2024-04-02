@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <h1>Session storage </h1>
+    <hr>
+
+    <form action="">
+        <label for="name">Name </label>
+        <input type="text" id="name" name="name">
+        
+        <br><br><br>
+        
+        <label for="value">value </label>
+        <input type="text" id="value" name="value">
+        <br>        <br>        <br>
+
+        <input type="button" value="create" onclick="create();">
+        <input type="button" value="delete" onclick="deleteeeeeeee();">
+        <input type="button" value="get" onclick="get();">
+        <input type="button" value="clear all" onclick="clearAll();">
+
+
+    </form>
+
+
+    <script>
+        let name = document.querySelector("#name");
+        let Value = document.querySelector("#value");
+
+        console.log(name, value);
+
+        function create() {
+            sessionStorage.setItem(name.value, Value.value);
+            alert("stored ");
+        }
+
+        let get = function() {
+            let ans = sessionStorage.getItem(name.value, Value.value);
+            Value.value = ans;
+        }
+
+        let deleteeeeeeee = () => {
+            sessionStorage.removeItem(name.value, Value.value);
+            alert("removed ! ");
+        }
+
+        let clearAll = function() {
+            sessionStorage.clear();
+            alert("all removed !");
+        }
+    </script>
+</body>
+</html>
